@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Management Tool</title>
+  <style>
+    /* CSS styling */
+    body {
+      
+      background-image: url(https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_640.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: 'Times New Roman', Times, serif;
+      background-attachment: fixed;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      color:white;
+    }
+    
+    .task-input {
+      display: flex;
+      margin-bottom: 10px;
+      border-style: solid;
+      background-color:chartreuse;
+      border-color:darkorange;
+    
+  
+    }
+    
+    .task-input input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: chartreuse;
+      
+    }
+    
+    .task-input button {
+      padding: 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+      color: #ccc;
+    }
+    
+    .task-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: white;
+    }
+    
+    .task-list li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    
+    .task-list li button {
+      margin-left: auto;
+      padding: 5px;
+      border: none;
+      background-color:orange;
+      border-style: solid;
+      border-color: black;
+      color: white;
+      cursor: pointer;
+    }
+    .task-list li button:hover{
+      background-color: red;
+      border-color: aqua;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Project Management Tool</h1>
+    
+    <div class="task-input" autocomplete="off">
+      <input type="text" autocomplete="off" id="taskInput" placeholder="Enter a task">
+      <button id="addTaskButton">Add Task</button>
+    </div>
+    
+    <ul class="task-list" id="taskList">
+    </ul>
+  </div>
+  
+  <script>
+    // JavaScript code
+    const taskInput = document.getElementById('taskInput');
+    const addTaskButton = document.getElementById('addTaskButton');
+    const taskList = document.getElementById('taskList');
+    
+    // Function to add a new task
+    function addTask() {
+      const taskText = taskInput.value;
+      
+      if (taskText.trim() !== '') {
+        const li = document.createElement('li');
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        
+        const taskLabel = document.createElement('label');
+        taskLabel.textContent = taskText;
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        
+        // Event listener for delete button click
+        deleteButton.addEventListener('click', () => {
+          li.remove();
+        });
+        
+        li.appendChild(checkbox);
+        li.appendChild(taskLabel);
+        li.appendChild(deleteButton);
+        
+        taskList.appendChild(li);
+        
+        taskInput.value = '';
+      }
+    }
+    
+    // Event listener for add task button click
+    addTaskButton.addEventListener('click', addTask);
+    
+    // Event listener for enter key press on task input
+    taskInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
